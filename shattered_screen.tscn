@@ -1,0 +1,216 @@
+[gd_scene format=3 uid="uid://bdurejrhh6n3p"]
+
+[ext_resource type="Script" uid="uid://h0gt5gdrup5e" path="res://shattered_screen.gd" id="1_y7hrp"]
+
+[sub_resource type="Shader" id="Shader_vexw7"]
+code = "shader_type canvas_item;
+uniform bool enabled = true;
+uniform sampler2D screen_texture: hint_screen_texture;
+uniform float angle : hint_range(0, 360) = 0.0;
+
+vec2 rotate(vec2 uv, vec2 pivot, float angle_rad) {
+    uv -= pivot;
+    uv = vec2(
+        uv.x * cos(angle_rad) - uv.y * sin(angle_rad),
+        uv.x * sin(angle_rad) + uv.y * cos(angle_rad)
+    );
+    uv += pivot;
+    return uv;
+}
+
+void fragment() {
+	if(enabled){
+		vec2 rotated_uv = rotate(SCREEN_UV, vec2(0.5), radians(angle));
+		COLOR = texture(screen_texture, rotated_uv);
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5hg6"]
+shader = SubResource("Shader_vexw7")
+shader_parameter/enabled = true
+shader_parameter/angle = 11.0000005225
+
+[sub_resource type="Shader" id="Shader_o5hg6"]
+code = "shader_type canvas_item;
+uniform bool enabled = true;
+uniform sampler2D screen_texture: hint_screen_texture;
+uniform float angle : hint_range(0, 360) = 0.0;
+
+vec2 rotate(vec2 uv, vec2 pivot, float angle_rad) {
+    uv -= pivot;
+    uv = vec2(
+        uv.x * cos(angle_rad) - uv.y * sin(angle_rad),
+        uv.x * sin(angle_rad) + uv.y * cos(angle_rad)
+    );
+    uv += pivot;
+    return uv;
+}
+
+void fragment() {
+	if(enabled){
+		vec2 rotated_uv = rotate(SCREEN_UV, vec2(0.5), radians(angle));
+		COLOR = texture(screen_texture, rotated_uv);
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3vxyu"]
+shader = SubResource("Shader_o5hg6")
+shader_parameter/enabled = true
+shader_parameter/angle = 6.000000285
+
+[sub_resource type="Shader" id="Shader_3vxyu"]
+code = "shader_type canvas_item;
+uniform bool enabled = true;
+uniform sampler2D screen_texture: hint_screen_texture;
+uniform float angle : hint_range(0, 360) = 0.0;
+
+vec2 rotate(vec2 uv, vec2 pivot, float angle_rad) {
+    uv -= pivot;
+    uv = vec2(
+        uv.x * cos(angle_rad) - uv.y * sin(angle_rad),
+        uv.x * sin(angle_rad) + uv.y * cos(angle_rad)
+    );
+    uv += pivot;
+    return uv;
+}
+
+void fragment() {
+	if(enabled){
+		vec2 rotated_uv = rotate(SCREEN_UV, vec2(0.5), radians(angle));
+		COLOR = texture(screen_texture, rotated_uv);
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7hrp"]
+shader = SubResource("Shader_3vxyu")
+shader_parameter/enabled = true
+shader_parameter/angle = 11.0000005225
+
+[sub_resource type="Shader" id="Shader_ar47h"]
+code = "shader_type canvas_item;
+uniform bool enabled = true;
+uniform sampler2D screen_texture: hint_screen_texture;
+uniform float angle : hint_range(0, 360) = 0.0;
+
+vec2 rotate(vec2 uv, vec2 pivot, float angle_rad) {
+    uv -= pivot;
+    uv = vec2(
+        uv.x * cos(angle_rad) - uv.y * sin(angle_rad),
+        uv.x * sin(angle_rad) + uv.y * cos(angle_rad)
+    );
+    uv += pivot;
+    return uv;
+}
+
+void fragment() {
+	if(enabled){
+		vec2 rotated_uv = rotate(SCREEN_UV, vec2(0.5), radians(angle));
+		COLOR = texture(screen_texture, rotated_uv);
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vexw7"]
+shader = SubResource("Shader_ar47h")
+shader_parameter/enabled = true
+shader_parameter/angle = 13.0000006175
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ghipw"]
+shader = SubResource("Shader_ar47h")
+shader_parameter/enabled = true
+shader_parameter/angle = 15.0000007125
+
+[sub_resource type="Shader" id="Shader_y7hrp"]
+code = "shader_type canvas_item;
+uniform bool enabled = true;
+uniform sampler2D screen_texture: hint_screen_texture;
+uniform float angle : hint_range(0, 360) = 0.0;
+
+vec2 rotate(vec2 uv, vec2 pivot, float angle_rad) {
+    uv -= pivot;
+    uv = vec2(
+        uv.x * cos(angle_rad) - uv.y * sin(angle_rad),
+        uv.x * sin(angle_rad) + uv.y * cos(angle_rad)
+    );
+    uv += pivot;
+    return uv;
+}
+
+void fragment() {
+	if(enabled){
+		vec2 rotated_uv = rotate(SCREEN_UV, vec2(0.5), radians(angle));
+		COLOR = texture(screen_texture, rotated_uv);
+	}
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ar47h"]
+shader = SubResource("Shader_y7hrp")
+shader_parameter/enabled = true
+shader_parameter/angle = 358.000017005
+
+[node name="ShatteredScreen" type="Node2D" unique_id=1479339792]
+script = ExtResource("1_y7hrp")
+
+[node name="Shard1" type="Polygon2D" parent="." unique_id=2010493494]
+visible = false
+material = SubResource("ShaderMaterial_o5hg6")
+polygon = PackedVector2Array(0, 0, 172, 0, 420, 133, 540, 319, 159, 305, 0, 235)
+
+[node name="Shard2" type="Polygon2D" parent="." unique_id=1203545907]
+visible = false
+material = SubResource("ShaderMaterial_3vxyu")
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(651, 0, 1280, 0, 1118, 313, 1021, 174, 719, 328, 741, 104)
+
+[node name="Shard3" type="Polygon2D" parent="." unique_id=366396539]
+visible = false
+material = SubResource("ShaderMaterial_y7hrp")
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(640, 360, 767, 587, 1004, 715, 397, 719, 442, 563, 521, 474)
+
+[node name="Shard4" type="Polygon2D" parent="." unique_id=2016860704]
+visible = false
+material = SubResource("ShaderMaterial_vexw7")
+color = Color(0, 1, 0, 1)
+polygon = PackedVector2Array(237, 0, 624, 0, 724, 156, 670, 396, 550, 224, 392, 99)
+
+[node name="Shard5" type="Polygon2D" parent="." unique_id=536385794]
+visible = false
+material = SubResource("ShaderMaterial_ghipw")
+color = Color(0, 0, 1, 1)
+polygon = PackedVector2Array(173, 591, 84, 411, 572, 345, 396, 537, 332, 702, 0, 720)
+
+[node name="Shard6" type="Polygon2D" parent="." unique_id=1236156838]
+visible = false
+material = SubResource("ShaderMaterial_ar47h")
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(851, 484, 710, 364, 1145, 456, 1223, 284, 1280, 656, 1169, 649, 1095, 720, 916, 622)

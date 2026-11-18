@@ -1,23 +1,69 @@
 extends CharacterBody3D
 
-@export var speed := 6.0
-@export var mouse_sensitivity := 0.002
-@onready var camera := $Camera3D
+var mouse_sensitivity: float = 0.002
+@onready var player_camera: Camera3D = $PlayerCamera
+
+var peek_transition: float = 0.0:
+	set(value):
+		peek_transition = clamp(value, 0.0, 1.0)
+const peek_speed: float = 0.5
+
+var madness: float = 0.0:
+	set(value):
+		madness = clamp(value, 0.0, 1.0)
+		if madness == 1.0:
+			SignalBus.madness_level_changed.emit(6)
+		elif madness >= 0.8:
+			SignalBus.madness_level_changed.emit(5)
+		elif madness >= 0.6:
+			SignalBus.madness_level_changed.emit(4)
+		elif madness >= 0.4:
+			SignalBus.madness_level_changed.emit(3)
+		elif madness >= 0.2:
+			SignalBus.madness_level_changed.emit(2)
+		elif madness >= 0.1:
+			SignalBus.madness_level_changed.emit(1)
+		else:
+			SignalBus.madness_level_changed.emit(0)
+const madness_buildup_speed: float = 0.05
+
+const speed: float = 6.0
+var input_dir: Vector2 = Vector2.ZERO
+var move_dir: Vector3 = Vector3.ZERO
+
+var camera_relative: Vector2:
+	set(value):
+		update_camera(value)
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * mouse_sensitivity)
-		camera.rotate_x(-event.relative.y * mouse_sensitivity)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
+func _process(delta: float) -> void:
+	input_dir = Input.get_vector("Left", "Right","Forward","Backward")
+	move_dir = Vector3(input_dir.x, 0.0, input_dir.y).rotated(Vector3.UP, rotation.y)
+	
+	if Input.is_action_pressed("Peek"):
+		peek_transition += peek_speed * delta
+		madness += madness_buildup_speed * delta
+	elif peek_transition > 0.0:
+		peek_transition -= 2.0 * peek_speed * delta
 
 func _physics_process(delta: float) -> void:
+	if move_dir:
+		velocity.x = move_dir.x * speed * remap(madness, 0.0, 1.0, 1.0, 0.4)
+		velocity.z = move_dir.z * speed * remap(madness, 0.0, 1.0, 1.0, 0.4)
+	else:
+		velocity.x = 0.0
+		velocity.z = 0.0
+	
 	if not is_on_floor():
-		velocity.y -= 20.0 * delta
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
+		velocity += get_gravity() * delta
+	else:
+		velocity.y = 0.0
+	
 	move_and_slide()
+
+func update_camera(relative: Vector2) -> void:
+	rotate_y(-relative.x * mouse_sensitivity)
+	player_camera.rotate_x(-relative.y * mouse_sensitivity)
+	player_camera.rotation_degrees.x = clamp(player_camera.rotation_degrees.x, -60.0, 90.0)

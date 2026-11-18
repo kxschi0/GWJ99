@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://2pp1jxre1q3j"]
 
-[ext_resource type="Script" uid="uid://dca47rl46bmmx" path="res://player.gd" id="1_ntspc"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bhunq"]
-radius = 0.4
+[ext_resource type="PackedScene" path="res://player.tscn" id="1_ntspc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntspc"]
 albedo_color = Color(0.83137256, 0.73333335, 0.15686275, 1)
@@ -12,22 +9,8 @@ albedo_color = Color(0.83137256, 0.73333335, 0.15686275, 1)
 
 [node name="map" type="Node3D" unique_id=1941927992]
 
-[node name="player" type="CharacterBody3D" parent="." unique_id=1481804290]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.092241, 1.6257156, 0)
-script = ExtResource("1_ntspc")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="player" unique_id=403738937]
-shape = SubResource("CapsuleShape3D_bhunq")
-
-[node name="Camera3D" type="Camera3D" parent="player" unique_id=1015992664]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4260304, 0.13252568)
-fov = 43.30678
-near = 0.01
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=915398071]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 1.0343311, 10.175653, -3.3458872)
-shadow_enabled = true
-sky_mode = 2
+[node name="Player" parent="." unique_id=166854185 instance=ExtResource("1_ntspc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.785289, 0, 0)
 
 [node name="floors" type="Node3D" parent="." unique_id=513455278]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
