@@ -8,6 +8,7 @@ extends Node
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("Player")
+	player.interact_ray.enabled = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 var mouse_sensitivity: float = 0.002
 @onready var player_camera: Camera3D = $PlayerCamera
+@onready var interact_ray: RayCast3D = $PlayerCamera/InteractRay
 
 var peek_transition: float = 0.0:
 	set(value):
@@ -47,6 +48,12 @@ func _process(delta: float) -> void:
 		madness += madness_buildup_speed * delta
 	elif peek_transition > 0.0:
 		peek_transition -= 2.0 * peek_speed * delta
+	
+	if Input.is_action_just_pressed("Interact"):
+		if interact_ray.is_colliding():
+			var collider: Object = interact_ray.get_collider()
+			if collider.get_collision_layer_value(3):
+				interact(collider)
 
 func _physics_process(delta: float) -> void:
 	if move_dir:
@@ -67,3 +74,6 @@ func update_camera(relative: Vector2) -> void:
 	rotate_y(-relative.x * mouse_sensitivity)
 	player_camera.rotate_x(-relative.y * mouse_sensitivity)
 	player_camera.rotation_degrees.x = clamp(player_camera.rotation_degrees.x, -60.0, 90.0)
+
+func interact(interactable: Object) -> void:
+	pass

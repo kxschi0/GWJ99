@@ -15,3 +15,8 @@ shape = SubResource("CapsuleShape3D_pyw77")
 [node name="PlayerCamera" type="Camera3D" parent="." unique_id=81765997]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 cull_mask = 1
+
+[node name="InteractRay" type="RayCast3D" parent="PlayerCamera" unique_id=423820012]
+enabled = false
+target_position = Vector3(0, 0, -2)
+collision_mask = 5
