@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://g53bgedfxbqh"]
+
+[ext_resource type="Script" uid="uid://dwcd8nlnjkaaq" path="res://game.gd" id="1_7jktm"]
+[ext_resource type="PackedScene" uid="uid://2pp1jxre1q3j" path="res://mapGB.tscn" id="2_ryrav"]
+[ext_resource type="Shader" uid="uid://dlq0x60vwswg2" path="res://Materials/Shaders/madness.gdshader" id="6_ryrav"]
+[ext_resource type="PackedScene" uid="uid://bdurejrhh6n3p" path="res://shattered_screen.tscn" id="7_eow3j"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7jktm"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ryrav"]
+sky_material = SubResource("ProceduralSkyMaterial_7jktm")
+
+[sub_resource type="Environment" id="Environment_eow3j"]
+background_mode = 2
+sky = SubResource("Sky_ryrav")
+
+[sub_resource type="Shader" id="Shader_fc0e3"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+uniform sampler2D normal_world_viewport;
+uniform float alpha: hint_range(0.0, 1.0, 0.01) = 1.0;
+
+void fragment() {
+	COLOR = texture(normal_world_viewport, UV);
+	COLOR.a = alpha;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_feb5d"]
+viewport_path = NodePath("NormalWorldViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jktm"]
+resource_local_to_scene = true
+shader = SubResource("Shader_fc0e3")
+shader_parameter/normal_world_viewport = SubResource("ViewportTexture_feb5d")
+shader_parameter/alpha = 1.0
+
+[sub_resource type="Shader" id="Shader_ryrav"]
+code = "shader_type canvas_item;
+uniform sampler2D other_world_viewport;
+uniform float alpha: hint_range(0.0, 1.0, 0.01) = 0.0;
+
+void fragment() {
+	COLOR = texture(other_world_viewport, UV);
+	COLOR.a = alpha;
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fc0e3"]
+viewport_path = NodePath("OtherWorldViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5wjh"]
+resource_local_to_scene = true
+shader = SubResource("Shader_ryrav")
+shader_parameter/other_world_viewport = SubResource("ViewportTexture_fc0e3")
+shader_parameter/alpha = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fc0e3"]
+shader = ExtResource("6_ryrav")
+shader_parameter/alpha = 0.999999977648
+
+[node name="Game" type="Node" unique_id=1403667610]
+script = ExtResource("1_7jktm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=578212024]
+environment = SubResource("Environment_eow3j")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=751468247]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 1.0343311, 10.175653, -3.3458872)
+shadow_enabled = true
+sky_mode = 2
+
+[node name="NormalWorldViewport" type="SubViewport" parent="." unique_id=982119415]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="map" parent="NormalWorldViewport" unique_id=1941927992 instance=ExtResource("2_ryrav")]
+
+[node name="OtherWorldViewport" type="SubViewport" parent="." unique_id=574596014]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="map" parent="OtherWorldViewport" unique_id=275444066 instance=ExtResource("2_ryrav")]
+
+[node name="Vision" type="Control" parent="." unique_id=2083349659]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NormalVision" type="ColorRect" parent="Vision" unique_id=1835251060]
+material = SubResource("ShaderMaterial_7jktm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="OtherVision" type="ColorRect" parent="Vision" unique_id=714943569]
+material = SubResource("ShaderMaterial_j5wjh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="MadnessRim" type="ColorRect" parent="Vision" unique_id=1199915741]
+material = SubResource("ShaderMaterial_fc0e3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="ShatteredScreen" parent="Vision" unique_id=420067000 instance=ExtResource("7_eow3j")]
