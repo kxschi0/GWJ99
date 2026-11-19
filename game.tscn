@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwcd8nlnjkaaq" path="res://game.gd" id="1_7jktm"]
 [ext_resource type="PackedScene" uid="uid://2pp1jxre1q3j" path="res://mapGB.tscn" id="2_ryrav"]
+[ext_resource type="PackedScene" uid="uid://d0bbduaqtch0d" path="res://hud.tscn" id="5_7jktm"]
 [ext_resource type="Shader" uid="uid://dlq0x60vwswg2" path="res://Materials/Shaders/madness.gdshader" id="6_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bdurejrhh6n3p" path="res://shattered_screen.tscn" id="7_eow3j"]
 
@@ -139,3 +140,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
 [node name="ShatteredScreen" parent="Vision" unique_id=420067000 instance=ExtResource("7_eow3j")]
+
+[node name="HUD" parent="Vision" unique_id=135806594 instance=ExtResource("5_7jktm")]
+layout_mode = 1
+mouse_filter = 2

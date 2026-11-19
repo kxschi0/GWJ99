@@ -1,6 +1,7 @@
 extends Node
 
 @onready var player: CharacterBody3D = null
+@onready var hud: Control = $Vision/HUD
 
 @onready var normal_vision: ColorRect = $Vision/NormalVision
 @onready var other_vision: ColorRect = $Vision/OtherVision
@@ -12,10 +13,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		for player in get_tree().get_nodes_in_group("Player"):
-			player.camera_relative = event.relative
+		for player_instance in get_tree().get_nodes_in_group("Player"):
+			player_instance.camera_relative = event.relative
 	
 func _process(delta: float) -> void:
-	normal_vision.material.set_shader_parameter("alpha", 1.0 - player.peek_transition)
 	other_vision.material.set_shader_parameter("alpha", player.peek_transition)
 	madness_rim.material.set_shader_parameter("alpha", player.madness)

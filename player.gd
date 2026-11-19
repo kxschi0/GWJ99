@@ -51,11 +51,16 @@ func _process(delta: float) -> void:
 	elif peek_transition > 0.0:
 		peek_transition -= 2.0 * peek_speed * delta
 	
-	if Input.is_action_just_pressed("Interact"):
-		if interact_ray.is_colliding():
-			var collider: Object = interact_ray.get_collider()
-			if collider is Interactable:
+	if interact_ray.is_colliding() and interact_ray.enabled:
+		var collider: Object = interact_ray.get_collider()
+		if collider is Interactable:
+			get_tree().current_scene.hud.show_interaction_text(collider.interaction_text)
+			if Input.is_action_just_pressed("Interact"):
 				interact(collider)
+		else:
+			get_tree().current_scene.hud.hide_interaction_text()
+	elif interact_ray.enabled:
+		get_tree().current_scene.hud.hide_interaction_text()
 
 func _physics_process(delta: float) -> void:
 	if move_dir:
@@ -75,11 +80,11 @@ func _physics_process(delta: float) -> void:
 func update_camera(relative: Vector2) -> void:
 	rotate_y(-relative.x * mouse_sensitivity)
 	player_camera.rotate_x(-relative.y * mouse_sensitivity)
-	player_camera.rotation_degrees.x = clamp(player_camera.rotation_degrees.x, -60.0, 90.0)
+	player_camera.rotation_degrees.x = clamp(player_camera.rotation_degrees.x, -90.0, 90.0)
 
 func interact(interactable: Interactable) -> void:
 	interactable._on_interaction()
 
 func _on_pills_collected() -> void:
-	const pills_restoring_value: float = 0.2
+	const pills_restoring_value: float = 0.3
 	madness -= pills_restoring_value
