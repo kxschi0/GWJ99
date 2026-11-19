@@ -38,6 +38,8 @@ var camera_relative: Vector2:
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	SignalBus.pills_collected.connect(_on_pills_collected)
 
 func _process(delta: float) -> void:
 	input_dir = Input.get_vector("Left", "Right","Forward","Backward")
@@ -52,7 +54,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Interact"):
 		if interact_ray.is_colliding():
 			var collider: Object = interact_ray.get_collider()
-			if collider.get_collision_layer_value(3):
+			if collider is Interactable:
 				interact(collider)
 
 func _physics_process(delta: float) -> void:
@@ -75,5 +77,9 @@ func update_camera(relative: Vector2) -> void:
 	player_camera.rotate_x(-relative.y * mouse_sensitivity)
 	player_camera.rotation_degrees.x = clamp(player_camera.rotation_degrees.x, -60.0, 90.0)
 
-func interact(interactable: Object) -> void:
-	pass
+func interact(interactable: Interactable) -> void:
+	interactable._on_interaction()
+
+func _on_pills_collected() -> void:
+	const pills_restoring_value: float = 0.2
+	madness -= pills_restoring_value

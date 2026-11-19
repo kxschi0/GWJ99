@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://2pp1jxre1q3j"]
 
 [ext_resource type="PackedScene" uid="uid://dwyn8r80rrd8k" path="res://player.tscn" id="1_ntspc"]
+[ext_resource type="PackedScene" uid="uid://78xoq3bky4uj" path="res://pills.tscn" id="2_y3fgu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntspc"]
 albedo_color = Color(0.83137256, 0.73333335, 0.15686275, 1)
@@ -556,3 +557,8 @@ size = Vector3(0.1652832, 1.8616943, 1.6113281)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -67.78146, 0.86686635, -9.182894)
 use_collision = true
 size = Vector3(0.9680481, 0.49118042, 1.0100098)
+
+[node name="Pills" type="Node3D" parent="objects" unique_id=1059252026]
+
+[node name="Pills" parent="objects/Pills" unique_id=108830069 instance=ExtResource("2_y3fgu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.139751, 0.39116478, 0)
