@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dwcd8nlnjkaaq" path="res://game.gd" id="1_7jktm"]
 [ext_resource type="PackedScene" uid="uid://2pp1jxre1q3j" path="res://mapGB.tscn" id="2_ryrav"]
-[ext_resource type="PackedScene" uid="uid://d0bbduaqtch0d" path="res://hud.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://d0bbduaqtch0d" path="res://UI/hud.tscn" id="5_7jktm"]
 [ext_resource type="Shader" uid="uid://dlq0x60vwswg2" path="res://Materials/Shaders/madness.gdshader" id="6_ryrav"]
-[ext_resource type="PackedScene" uid="uid://bdurejrhh6n3p" path="res://shattered_screen.tscn" id="7_eow3j"]
+[ext_resource type="PackedScene" uid="uid://bdurejrhh6n3p" path="res://UI/shattered_screen.tscn" id="7_eow3j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7jktm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

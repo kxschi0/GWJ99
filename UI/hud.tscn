@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0bbduaqtch0d"]
 
-[ext_resource type="Script" uid="uid://c4d0tjrsc1ohm" path="res://hud.gd" id="1_37p78"]
+[ext_resource type="Script" uid="uid://c4d0tjrsc1ohm" path="res://UI/hud.gd" id="1_37p78"]
 
 [sub_resource type="Gradient" id="Gradient_n2snw"]
 offsets = PackedFloat32Array(0)

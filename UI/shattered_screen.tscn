@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bdurejrhh6n3p"]
 
-[ext_resource type="Script" uid="uid://h0gt5gdrup5e" path="res://shattered_screen.gd" id="1_y7hrp"]
+[ext_resource type="Script" uid="uid://h0gt5gdrup5e" path="res://UI/shattered_screen.gd" id="1_y7hrp"]
+
 
 [sub_resource type="Shader" id="Shader_vexw7"]
 code = "shader_type canvas_item;

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://2pp1jxre1q3j"]
 
 [ext_resource type="PackedScene" uid="uid://dwyn8r80rrd8k" path="res://player.tscn" id="1_ntspc"]
-[ext_resource type="PackedScene" uid="uid://78xoq3bky4uj" path="res://pills.tscn" id="2_y3fgu"]
+[ext_resource type="PackedScene" uid="uid://78xoq3bky4uj" path="res://Interactables/pills.tscn" id="2_y3fgu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntspc"]
 albedo_color = Color(0.83137256, 0.73333335, 0.15686275, 1)
