@@ -4,6 +4,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pyw77"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4flbx"]
+margin = 0.1
+size = Vector3(0.1, 0.1, 2)
+
 [node name="Player" type="CharacterBody3D" unique_id=166854185 groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_i3pqv")
@@ -16,8 +20,8 @@ shape = SubResource("CapsuleShape3D_pyw77")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 cull_mask = 1
 
-[node name="InteractRay" type="RayCast3D" parent="PlayerCamera" unique_id=423820012]
-enabled = false
-target_position = Vector3(0, 0, -2)
+[node name="InteractRay" type="ShapeCast3D" parent="PlayerCamera" unique_id=273079914]
+shape = SubResource("BoxShape3D_4flbx")
+target_position = Vector3(0, 0, -1)
 collision_mask = 5
 collide_with_areas = true

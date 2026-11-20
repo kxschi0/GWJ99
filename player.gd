@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 var mouse_sensitivity: float = 0.002
 @onready var player_camera: Camera3D = $PlayerCamera
-@onready var interact_ray: RayCast3D = $PlayerCamera/InteractRay
+@onready var interact_ray: ShapeCast3D = $PlayerCamera/InteractRay
 
 var peek_transition: float = 0.0:
 	set(value):
@@ -52,13 +52,16 @@ func _process(delta: float) -> void:
 		peek_transition -= 2.0 * peek_speed * delta
 	
 	if interact_ray.is_colliding() and interact_ray.enabled:
-		var collider: Object = interact_ray.get_collider()
-		if collider is Interactable:
-			get_tree().current_scene.hud.show_interaction_text(collider.interaction_text)
-			if Input.is_action_just_pressed("Interact"):
-				interact(collider)
-		else:
-			get_tree().current_scene.hud.hide_interaction_text()
+		for collision in interact_ray.get_collision_count():
+			var collider: Object = interact_ray.get_collider(collision)
+			if collider is Interactable:
+				get_tree().current_scene.hud.show_interaction_text(collider.interaction_text)
+				if Input.is_action_just_pressed("Interact"):
+					interact(collider)
+			else:
+				if collision == 0:
+					get_tree().current_scene.hud.hide_interaction_text()
+				break
 	elif interact_ray.enabled:
 		get_tree().current_scene.hud.hide_interaction_text()
 

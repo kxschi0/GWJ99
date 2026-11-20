@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dwyn8r80rrd8k" path="res://player.tscn" id="1_ntspc"]
 [ext_resource type="PackedScene" uid="uid://78xoq3bky4uj" path="res://Interactables/pills.tscn" id="2_y3fgu"]
+[ext_resource type="PackedScene" uid="uid://dkggovy85l1n0" path="res://Interactables/door.tscn" id="3_ariu5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntspc"]
 albedo_color = Color(0.83137256, 0.73333335, 0.15686275, 1)
@@ -558,7 +559,12 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -67.
 use_collision = true
 size = Vector3(0.9680481, 0.49118042, 1.0100098)
 
-[node name="Pills" type="Node3D" parent="objects" unique_id=1059252026]
+[node name="Pills" type="Node3D" parent="." unique_id=1059252026]
 
-[node name="Pills" parent="objects/Pills" unique_id=108830069 instance=ExtResource("2_y3fgu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.139751, 0.39116478, 0)
+[node name="Pills" parent="Pills" unique_id=108830069 instance=ExtResource("2_y3fgu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.764523, 0.39116478, 0)
+
+[node name="doors" type="Node3D" parent="." unique_id=951423596]
+
+[node name="Door" parent="doors" unique_id=530627011 instance=ExtResource("3_ariu5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.36982, 0, 0)
