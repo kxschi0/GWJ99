@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dwyn8r80rrd8k" path="res://player.tscn" id="1_ntspc"]
 [ext_resource type="PackedScene" uid="uid://bkjksmbbcxa8a" path="res://monster/monster.tscn" id="2_1aq5t"]
 [ext_resource type="PackedScene" uid="uid://78xoq3bky4uj" path="res://Interactables/pills.tscn" id="2_y3fgu"]
+[ext_resource type="PackedScene" uid="uid://3s2i46ihuye8" path="res://Interactables/safe.tscn" id="3_4nyoh"]
 [ext_resource type="PackedScene" uid="uid://dkggovy85l1n0" path="res://Interactables/door.tscn" id="3_ariu5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ntspc"]
@@ -500,10 +501,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.061532, 1.2533193, 45.3951
 use_collision = true
 size = Vector3(0.8, 0.8, 0.8)
 
-[node name="safe with key2" type="CSGBox3D" parent="objects" unique_id=1227207332]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.842591, 1.2533193, -37.0151)
-use_collision = true
-size = Vector3(0.8, 0.8, 0.8)
+[node name="Safe 2" parent="objects" unique_id=858680104 instance=ExtResource("3_4nyoh")]
+transform = Transform3D(-2.0325796e-08, 0, 0.465, 0, 0.465, 0, -0.465, 0, -2.0325796e-08, 10.842591, 1.2533193, -37.0151)
 
 [node name="safe with key3" type="CSGBox3D" parent="objects" unique_id=1154558834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -71.649635, 1.2533193, 2.0834715)
