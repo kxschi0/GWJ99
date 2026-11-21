@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
-@export var player_path: NodePath
-@export var base_player_speed:= 5.0
-@export var detection_range:= 14.0
-@export var field_of_view_degrees:= 130.0
+var player_path: NodePath
+var base_player_speed:= 5.0
+var detection_range:= 14.0
+var field_of_view_degrees:= 180.0
 
 @export_group("Spawning Rules")
 @export var min_spawn_distance_from_player:= 10.0
@@ -21,9 +21,14 @@ extends CharacterBody3D
 @onready var raycast: RayCast3D = $RayCast3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var visual_pivot: Node3D = $VisualPivot
+@onready var animation_player: AnimationPlayer = $VisualPivot/AnimationPlayer
+@onready var jumpscare_area: Area3D = $JumpscareArea
 
-enum State { GRACE_PERIOD, PATROL, CHASE, SEARCHING, COOLDOWN }
-var current_state: State = State.GRACE_PERIOD
+enum State { GRACE_PERIOD, PATROL, CHASE, SEARCHING, COOLDOWN, JUMPSCARE }
+var current_state: State = State.GRACE_PERIOD:
+	set(value):
+		current_state = value
+		#print(State.keys()[current_state])
 
 var state_timer:= 0.0
 var grace_time:= 15.0
@@ -48,33 +53,45 @@ var smooth_velocity: Vector3 = Vector3.ZERO
 var target_yaw:= 0.0
 var bob_time:= 0.0
 
+var saved_scene_path: String = ""
+
 func _ready():
 	fallback_spawn_origin = global_position
 	exact_spawn_position = global_position
 	last_position = global_position
 	target_yaw = rotation.y
 	
+	if get_tree().current_scene:
+		saved_scene_path = get_tree().current_scene.scene_file_path
+	
 	raycast.add_exception(self)
 	call_deferred("_find_player")
+	
+	if not animation_player and has_node("VisualPivot/AnimationPlayer"):
+		animation_player = $VisualPivot/AnimationPlayer
+		
+	if jumpscare_area and not jumpscare_area.is_connected("body_entered", Callable(self, "_on_jumpscare_body_entered")):
+		jumpscare_area.body_entered.connect(_on_jumpscare_body_entered)
 	
 	current_state = State.GRACE_PERIOD
 	state_timer = grace_time
 	set_stalker_active(false)
 
 func _find_player():
-	if not player_path.is_empty():
-		player = get_node_or_null(player_path)
 	if not player:
-		player = get_tree().get_first_node_in_group("player")
+		player = get_tree().get_first_node_in_group("Player")
 
 func _process(delta):
-	if not is_spawned or not visual_pivot:
+	if not visual_pivot:
+		return
+		
+	if current_state == State.JUMPSCARE:
 		return
 		
 	rotation.y = lerp_angle(rotation.y, target_yaw, 1.0 - exp(-turn_smoothness * delta))
 	
 	var horizontal_speed = Vector2(velocity.x, velocity.z).length()
-	if horizontal_speed > 0.2:
+	if is_spawned and horizontal_speed > 0.2:
 		bob_time += delta * head_bob_frequency * (horizontal_speed / 3.5)
 		visual_pivot.position.y = sin(bob_time) * head_bob_amplitude
 		var target_pitch = deg_to_rad(-4.0 * clamp(horizontal_speed / 4.0, 0.0, 1.0))
@@ -83,10 +100,109 @@ func _process(delta):
 		bob_time = 0.0
 		visual_pivot.position.y = lerp(visual_pivot.position.y, 0.0, 1.0 - exp(-8.0 * delta))
 		visual_pivot.rotation.x = lerp_angle(visual_pivot.rotation.x, 0.0, 1.0 - exp(-8.0 * delta))
+		
+	update_animations(horizontal_speed)
+
+func update_animations(speed):
+	if not animation_player or current_state == State.JUMPSCARE:
+		return
+		
+	var anim_to_play = "MonsterIdle"
+	
+	if current_state == State.CHASE:
+		anim_to_play = "MonsterRun"
+	elif speed > 0.1:
+		anim_to_play = "MonsterCrawl"
+	else:
+		anim_to_play = "MonsterIdle"
+		
+	play_anim(anim_to_play)
+
+func play_anim(anim_name: String):
+	if not animation_player:
+		return
+		
+	var target_anim = anim_name
+	
+	if not animation_player.has_animation(target_anim):
+		var found = false
+		for lib in animation_player.get_animation_library_list():
+			var full_name = str(lib) + "/" + anim_name
+			if animation_player.has_animation(full_name):
+				target_anim = full_name
+				found = true
+				break
+		if not found and "/" not in anim_name:
+			if animation_player.has_animation("Animpack1/" + anim_name):
+				target_anim = "Animpack1/" + anim_name
+				
+	if animation_player.has_animation(target_anim):
+		if animation_player.current_animation != target_anim or not animation_player.is_playing():
+			animation_player.play(target_anim)
+
+func _on_jumpscare_body_entered(body):
+	if current_state == State.JUMPSCARE:
+		return
+		
+	if body == player or body.is_in_group("player"):
+		trigger_jumpscare()
+
+func trigger_jumpscare():
+	if current_state == State.JUMPSCARE:
+		return
+		
+	current_state = State.JUMPSCARE
+	smooth_velocity = Vector3.ZERO
+	velocity = Vector3.ZERO
+	
+	if collision_shape:
+		collision_shape.set_deferred("disabled", true)
+		
+	play_anim("MonsterJumpscareAttack")
+	
+	if player:
+		if player.has_method("disable_movement"):
+			player.disable_movement()
+		if player.has_method("look_at_target"):
+			player.look_at_target(global_position)
+	
+	var anim_length = 1.5
+	var target_anim = "MonsterJumpscareAttack"
+	if not animation_player.has_animation(target_anim):
+		for lib in animation_player.get_animation_library_list():
+			if animation_player.has_animation(str(lib) + "/MonsterJumpscareAttack"):
+				target_anim = str(lib) + "/MonsterJumpscareAttack"
+				break
+				
+	if animation_player.has_animation(target_anim):
+		var anim = animation_player.get_animation(target_anim)
+		if anim:
+			anim_length = max(anim.length, 1.0)
+			
+	var tree = get_tree()
+	if tree:
+		tree.create_timer(anim_length).timeout.connect(_on_jumpscare_finished)
+	else:
+		var main_tree = Engine.get_main_loop() as SceneTree
+		if main_tree:
+			main_tree.create_timer(anim_length).timeout.connect(_on_jumpscare_finished)
+
+func _on_jumpscare_finished():
+	var tree = Engine.get_main_loop() as SceneTree
+	if tree:
+		if not saved_scene_path.is_empty():
+			tree.change_scene_to_file(saved_scene_path)
+		else:
+			tree.reload_current_scene()
 
 func _physics_process(delta):
-	if not player:
-		_find_player()
+	if player and is_spawned and current_state != State.JUMPSCARE:
+		if global_position.distance_to(player.global_position) < 1.3:
+			trigger_jumpscare()
+			return
+
+	if current_state == State.JUMPSCARE:
+		return
 
 	state_timer -= delta
 
@@ -131,13 +247,14 @@ func _physics_process(delta):
 func set_stalker_active(active: bool):
 	is_spawned = active
 	visible = active
-	collision_shape.set_deferred("disabled", not active)
+	if collision_shape:
+		collision_shape.set_deferred("disabled", not active)
 	if not active:
 		smooth_velocity = Vector3.ZERO
 		velocity = Vector3.ZERO
 
 func force_spawn():
-	if current_state == State.GRACE_PERIOD or (current_state == State.COOLDOWN and not is_spawned):
+	if not is_spawned:
 		start_patrol()
 
 func start_patrol():
@@ -265,7 +382,7 @@ func searching_behavior(delta):
 	else:
 		navigate_smoothly(delta, stalker_speed)
 
-func navigate_smoothly(delta: float, max_speed: float) -> void:
+func navigate_smoothly(delta, max_speed):
 	nav_agent.max_speed = max_speed
 	
 	if nav_agent.is_navigation_finished():
@@ -354,7 +471,7 @@ func check_player_detected():
 			var query = PhysicsRayQueryParameters3D.create(from_pos, to_pos)
 			query.exclude = [self.get_rid()]
 			var result = space_state.intersect_ray(query)
-			if result and (result.collider == player or result.collider.is_in_group("player")):
+			if result and (result.collider == player or result.collider.is_in_group("Player")):
 				return true
 	return false
 

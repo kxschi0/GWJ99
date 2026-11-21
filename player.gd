@@ -32,6 +32,8 @@ const speed: float = 6.0
 var input_dir: Vector2 = Vector2.ZERO
 var move_dir: Vector3 = Vector3.ZERO
 
+var can_move: bool = true
+
 var camera_relative: Vector2:
 	set(value):
 		update_camera(value)
@@ -42,6 +44,9 @@ func _ready() -> void:
 	SignalBus.pills_collected.connect(_on_pills_collected)
 
 func _process(delta: float) -> void:
+	if not can_move:
+		return
+	
 	input_dir = Input.get_vector("Left", "Right","Forward","Backward")
 	move_dir = Vector3(input_dir.x, 0.0, input_dir.y).rotated(Vector3.UP, rotation.y)
 	
@@ -66,6 +71,9 @@ func _process(delta: float) -> void:
 		get_tree().current_scene.hud.hide_interaction_text()
 
 func _physics_process(delta: float) -> void:
+	if not can_move:
+		return
+	
 	if move_dir:
 		velocity.x = move_dir.x * speed * remap(madness, 0.0, 1.0, 1.0, 0.4)
 		velocity.z = move_dir.z * speed * remap(madness, 0.0, 1.0, 1.0, 0.4)
@@ -81,6 +89,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func update_camera(relative: Vector2) -> void:
+	if not can_move:
+		return
+	
 	rotate_y(-relative.x * mouse_sensitivity)
 	player_camera.rotate_x(-relative.y * mouse_sensitivity)
 	player_camera.rotation_degrees.x = clamp(player_camera.rotation_degrees.x, -90.0, 90.0)
@@ -91,3 +102,15 @@ func interact(interactable: Interactable) -> void:
 func _on_pills_collected() -> void:
 	const pills_restoring_value: float = 0.3
 	madness -= pills_restoring_value
+
+func disable_movement():
+	can_move = false
+	velocity = Vector3.ZERO
+	
+	if player_camera:
+		player_camera.fov = 80.0
+		player_camera.position.z = 0.1
+
+func look_at_target(target_global_position: Vector3):
+	if player_camera:
+		player_camera.look_at(target_global_position + Vector3(0, 1.4, 0), Vector3.UP)
