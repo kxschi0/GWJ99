@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b7gu202kkj7xv"]
+
+[ext_resource type="PackedScene" uid="uid://7su8t65ax00m" path="res://Safe/safe_GWJ99.glb" id="1_r6act"]
+
+[node name="safe_GWJ99" unique_id=1205348859 instance=ExtResource("1_r6act")]
