@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cwlq6eq3k6ryr"]
-
-[ext_resource type="Script" uid="uid://dnxyao4fu4w3o" path="res://scripts/monster_test_1.gd" id="1_bvfol"]
-
-[node name="monster test 1" type="CharacterBody3D" unique_id=464560161]
-script = ExtResource("1_bvfol")
