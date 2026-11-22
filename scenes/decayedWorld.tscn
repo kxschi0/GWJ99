@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://fuk5nsn3pic1"]
 
 [ext_resource type="PackedScene" uid="uid://dwyn8r80rrd8k" path="res://player.tscn" id="1_2bv8v"]
+[ext_resource type="Script" uid="uid://we80lal0x0f7" path="res://scenes/decayed_world.gd" id="1_tayei"]
 [ext_resource type="PackedScene" uid="uid://bslt7ib25kcli" path="res://assetLib/back_rooms_wall.tscn" id="2_xgx1s"]
 [ext_resource type="PackedScene" uid="uid://db04abb6jdh6h" path="res://assetLib/back_rooms_carpet.tscn" id="3_tayei"]
 [ext_resource type="PackedScene" uid="uid://b64y7sb27astt" path="res://assetLib/back_rooms_molding.tscn" id="4_aty6s"]
 [ext_resource type="PackedScene" uid="uid://ccur73j5spldx" path="res://assetLib/back_rooms_ceiling_001.tscn" id="5_uub65"]
 [ext_resource type="PackedScene" uid="uid://c3t3cca87785k" path="res://assetLib/cabinet_01.tscn" id="6_20fb6"]
-[ext_resource type="PackedScene" uid="uid://78xoq3bky4uj" path="res://Interactables/pills.tscn" id="7_vghlx"]
 [ext_resource type="PackedScene" uid="uid://dq61boxy3j5kv" path="res://assetLib/back_rooms_post.tscn" id="8_405al"]
 [ext_resource type="PackedScene" uid="uid://d3o3dl74xhgf8" path="res://assetLib/lamp.tscn" id="9_42xmj"]
 [ext_resource type="PackedScene" uid="uid://cy7sxy7e4d5tx" path="res://assetLib/bush_01.tscn" id="10_ldo0c"]
@@ -19,12 +19,16 @@
 [ext_resource type="PackedScene" uid="uid://bquvvgxwmocxi" path="res://assetLib/medic_floor.tscn" id="17_uqlge"]
 [ext_resource type="PackedScene" uid="uid://44i4f58kkg4v" path="res://assetLib/medic_wall.tscn" id="18_sw7pi"]
 [ext_resource type="PackedScene" uid="uid://dkggovy85l1n0" path="res://Interactables/door.tscn" id="19_7feae"]
-[ext_resource type="PackedScene" uid="uid://yjv0hrqmb1ae" path="res://Interactables/decayeddoor.tscn" id="20_xgx1s"]
+[ext_resource type="PackedScene" path="res://Interactables/decayeddoor.tscn" id="20_xgx1s"]
 
-[node name="map" type="Node3D" unique_id=1941927992]
+[node name="map3" type="Node3D" unique_id=1941927992]
+script = ExtResource("1_tayei")
 
 [node name="Player" parent="." unique_id=166854185 instance=ExtResource("1_2bv8v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.785289, 0, 0)
+
+[node name="PlayerCamera" parent="Player" index="1" unique_id=81765997]
+cull_mask = 2
 
 [node name="StartRoom" type="Node3D" parent="." unique_id=1687741634]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
@@ -1057,11 +1061,6 @@ visible = false
 transform = Transform3D(3.774895e-07, 5, 2.6226832e-07, 0, -2.1855695e-07, 6, 5, -3.774895e-07, -1.9800708e-14, 30, 6, -19)
 visible = false
 
-[node name="Pills" type="Node3D" parent="." unique_id=1447613281]
-
-[node name="Pills" parent="Pills" unique_id=108830069 instance=ExtResource("7_vghlx")]
-transform = Transform3D(2.185, 0, 0, 0, 2.185, 0, 0, 0, 2.185, 9.905958, 1.20217, 0.16856742)
-
 [node name="Posts" type="Node3D" parent="." unique_id=1247670575]
 
 [node name="backRoomsPost" parent="Posts" unique_id=1522878739 instance=ExtResource("8_405al")]
@@ -1801,9 +1800,9 @@ transform = Transform3D(2, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 13.8
 transform = Transform3D(2, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 13.853327, 5.163325, -29.827612)
 
 [node name="Door" parent="." unique_id=1993138581 instance=ExtResource("20_xgx1s")]
-transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 9, 0, -30)
-collision_layer = 6
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 9.124657, 0, -30.107946)
 
 [node name="Door2" parent="." unique_id=359610453 instance=ExtResource("20_xgx1s")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -69, 0, 3)
-collision_layer = 6
+
+[editable path="Player"]

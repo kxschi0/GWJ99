@@ -64,10 +64,6 @@ func _process(delta: float) -> void:
 				get_tree().current_scene.hud.show_interaction_text(collider.interaction_text)
 				if Input.is_action_just_pressed("Interact"):
 					interact(collider)
-			else:
-				if collision == 0:
-					get_tree().current_scene.hud.hide_interaction_text()
-				break
 	elif interact_ray.enabled:
 		get_tree().current_scene.hud.hide_interaction_text()
 

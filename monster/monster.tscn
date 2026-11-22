@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bkjksmbbcxa8a"]
+[gd_scene format=4 uid="uid://od76hdxyvh4s"]
 
 [ext_resource type="Script" uid="uid://bf6slowbpnuks" path="res://monster/monster.gd" id="1_iey1v"]
 [ext_resource type="Texture2D" uid="uid://5u3a4dffbf37" path="res://assets/MonsterSkin_GWJ99_Skin_04_basecolor.jpg" id="2_d1qt4"]
@@ -2278,16 +2278,19 @@ bones/64/rotation = Quaternion(0.07169731, 0.99703586, 0.011149584, -0.025586037
 bones/64/scale = Vector3(1.000003, 1, 0.99999964)
 
 [node name="eyeL" type="MeshInstance3D" parent="VisualPivot/MonsterSkin_GWJ99/Armature/GeneralSkeleton" unique_id=2105826602]
+layers = 3
 mesh = SubResource("ArrayMesh_yj0nw")
 skin = SubResource("Skin_mdtb0")
 skeleton = NodePath("..")
 
 [node name="eyeR_001" type="MeshInstance3D" parent="VisualPivot/MonsterSkin_GWJ99/Armature/GeneralSkeleton" unique_id=768239059]
+layers = 3
 mesh = SubResource("ArrayMesh_p8ory")
 skin = SubResource("Skin_mdtb0")
 skeleton = NodePath("..")
 
 [node name="Human_002" type="MeshInstance3D" parent="VisualPivot/MonsterSkin_GWJ99/Armature/GeneralSkeleton" unique_id=1066741115]
+layers = 3
 mesh = SubResource("ArrayMesh_hhrh5")
 skin = SubResource("Skin_mdtb0")
 skeleton = NodePath("..")

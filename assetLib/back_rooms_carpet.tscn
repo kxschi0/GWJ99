@@ -47,7 +47,7 @@ shadow_mesh = SubResource("ArrayMesh_7g3qm")
 [sub_resource type="BoxShape3D" id="BoxShape3D_u4c48"]
 size = Vector3(2, 0.17883904, 2)
 
-[node name="backRoomsCarpet" type="MeshInstance3D" unique_id=1734554264]
+[node name="backRoomsCarpet" type="MeshInstance3D" unique_id=1734554264 groups=["Map Geometry"]]
 mesh = SubResource("ArrayMesh_6ive7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=50501304]

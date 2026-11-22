@@ -44,6 +44,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_aprog")
 
-[node name="backRoomsWall" type="MeshInstance3D" unique_id=2135747032]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a0i41"]
+data = PackedVector3Array(1, 0.0894, -1, -1, 0.0894, 1, -1, 0.0894, -1, 1, 0.0894, -1, 1, 0.0894, 1, -1, 0.0894, 1, 1, -0.0894, 1, -1, 0.0894, 1, 1, 0.0894, 1, 1, -0.0894, 1, -1, -0.0894, 1, -1, 0.0894, 1, -1, -0.0894, 1, -1, 0.0894, -1, -1, 0.0894, 1, -1, -0.0894, 1, -1, -0.0894, -1, -1, 0.0894, -1, -1, -0.0894, -1, 1, -0.0894, 1, 1, -0.0894, -1, -1, -0.0894, -1, -1, -0.0894, 1, 1, -0.0894, 1, 1, -0.0894, -1, 1, 0.0894, 1, 1, 0.0894, -1, 1, -0.0894, -1, 1, -0.0894, 1, 1, 0.0894, 1, -1, -0.0894, -1, 1, 0.0894, -1, -1, 0.0894, -1, -1, -0.0894, -1, 1, -0.0894, -1, 1, 0.0894, -1)
+
+[node name="backRoomsWall" type="MeshInstance3D" unique_id=2135747032 groups=["Map Geometry"]]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1aoky")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1864020343]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1913898769]
+shape = SubResource("ConcavePolygonShape3D_a0i41")
