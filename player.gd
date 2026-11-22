@@ -26,7 +26,7 @@ var madness: float = 0.0:
 			SignalBus.madness_level_changed.emit(1)
 		else:
 			SignalBus.madness_level_changed.emit(0)
-const madness_buildup_speed: float = 0.05
+const madness_buildup_speed: float = 0.01
 
 const speed: float = 6.0
 var input_dir: Vector2 = Vector2.ZERO
@@ -50,9 +50,10 @@ func _process(delta: float) -> void:
 	input_dir = Input.get_vector("Left", "Right","Forward","Backward")
 	move_dir = Vector3(input_dir.x, 0.0, input_dir.y).rotated(Vector3.UP, rotation.y)
 	
+	madness += madness_buildup_speed * delta
+	
 	if Input.is_action_pressed("Peek"):
 		peek_transition += peek_speed * delta
-		madness += madness_buildup_speed * delta
 	elif peek_transition > 0.0:
 		peek_transition -= 2.0 * peek_speed * delta
 	
