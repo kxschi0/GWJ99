@@ -1,0 +1,47 @@
+[gd_scene format=4 uid="uid://k78qc35u8c1c"]
+
+[ext_resource type="Texture2D" uid="uid://ldv4cg43a6q2" path="res://GLB/missing_GWJ99_bush01__1_-removebg-preview.png" id="1_foagf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7n54"]
+resource_name = "Material.006"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_foagf")
+roughness = 0.5
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_223m7"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"name": "Material.006",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAD/f///AAD///9/AAAAAP///3///wAAAAD/fwAAAAB9JX0l//8AAIHagdoAAAAAgdqB2v//AAB9JX0lAAAAAH0lgdr//wAAgdp9JQAAAACB2n0l//8AAH0lgdoAAAAA/3//////AAD/fwAAAAAAAP9/AAD//wAA/3///wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_csvn7"]
+resource_name = "missing_GWJ99_Plane_014"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("AAAB5P//NjP//wHkAAA2MwAAAeT//zYz//8B5AAANjMAAAHk//82M///AeQAADYzAAAB5P//NjP//wHkAAA2Mw=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_j7n54"),
+"name": "Material.006",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAD/f////7////9/AAD/v////3////+/AAD/fwAA/799JX0l///8xYHagdoAAPzFgdqB2v///MV9JX0lAAD8xX0lgdr///zFgdp9JQAA/MWB2n0l///8xX0lgdoAAPzF/3//////VNX/fwAAAABU1f9/AAD//1TV/3///wAAVNX///9/////f////3////9//+L9uf/i/bn/4v25/+L9uQDGAGMAxgBjAMYAYwDGAGOqqlRVqqpUVaqqVFWqqlRV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_223m7")
+
+[node name="bush04" type="MeshInstance3D" unique_id=144270955]
+transform = Transform3D(0.41781217, 0.4178122, -1.24517685e-08, -1.7609466e-08, 5.24803e-16, -0.59087557, -0.4178122, 0.4178121, 1.2451771e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_csvn7")

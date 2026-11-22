@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://d1yid1vh5lfg2"]
+
+[ext_resource type="Texture2D" uid="uid://cdeexy7h2ce3u" path="res://GLB/medicalOffice_Screenshot 2026-11-22 165525.png" id="1_31hdx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ww4sp"]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("1_31hdx")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yyyo1"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d6ea5"]
+resource_name = "medicalOffice_Plane_001"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray(70, 13, 113, 242, 180, 250, 4, 5, 180, 250, 113, 242, 70, 13, 4, 5),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_ww4sp"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_yyyo1")
+
+[node name="medicPoster" type="MeshInstance3D" unique_id=272526078]
+transform = Transform3D(0.231, 0, 0, 0, 0, -0.35, 0, 0.35, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_d6ea5")

@@ -1,0 +1,47 @@
+[gd_scene format=4 uid="uid://jorcce240qo6"]
+
+[ext_resource type="Texture2D" uid="uid://d3bmrpf8ds88j" path="res://GLB/missing_GWJ99_bush04__1_-removebg-preview.png" id="1_jbfw0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cslky"]
+resource_name = "Material.005"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_jbfw0")
+roughness = 0.5
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_aekps"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"name": "Material.005",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAD/f///AAD///9/AAAAAP///3///wAAAAD/fwAAAACB2n0l//8AAH0lgdoAAAAAfSWB2v//AACB2n0lAAAAAH0lfSX//wAAgdqB2gAAAACB2oHa//8AAH0lfSUAAAAA/38AAP//AAD/f///AAAAAP9//////wAA/38AAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o1ahe"]
+resource_name = "missing_GWJ99_Plane_012"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("7I0WTE26zRjUtSVDHI0tF+yNFkxNus0Y1LUlQxyNLRfsjRZMTbrNGNS1JUMcjS0X7I0WTE26zRjUtSVDHI0tFw=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_cslky"),
+"name": "Material.005",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAD/f///E8D///9/AAATwP///3///2/AAAD/fwAAAcCB2n0l//86530lgdoAADrnfSWB2v///eOB2n0lAACE6n0lfSX//8HEgdqB2gAAwcSB2oHa//9Nw30lfSUAAHDG/38AAP//RtP/f///AABG0/9//////57Q/38AAAAADtaQ9TaFkPU2heLpDYsW/i98/sgF7P7IBewvxtTupctd6ZHflLqR35S6z9pluyvkyrnE0pzWxNKc1i3PaNgz1uXU")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_aekps")
+
+[node name="bush03" type="MeshInstance3D" unique_id=1209910121]
+transform = Transform3D(-0.29305825, 0.29305828, -8.733817e-09, 1.23514825e-08, 0, -0.41444698, -0.29305828, -0.29305825, -8.733817e-09, 0, 0, 0)
+mesh = SubResource("ArrayMesh_o1ahe")

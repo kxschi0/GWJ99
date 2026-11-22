@@ -1,0 +1,56 @@
+[gd_scene format=4 uid="uid://db04abb6jdh6h"]
+
+[ext_resource type="Texture2D" uid="uid://blg2l5y54n0hy" path="res://GLB/mainHotel_GWJ99_backrooms-carpet-diffuse.png" id="1_5ux15"]
+[ext_resource type="Texture2D" uid="uid://bixmw7pcyajyp" path="res://GLB/mainHotel_GWJ99_backrooms-carpet-normal.png" id="2_ldv23"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p16x"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_5ux15")
+normal_enabled = true
+normal_scale = 0.19999993
+normal_texture = ExtResource("2_ldv23")
+uv1_scale = Vector3(5, 5, 5)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7g3qm"]
+_surfaces = [{
+"aabb": AABB(-1, -0.08941952, -1, 2, 0.17883904, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAAAEAAEAAwAFAAIABQAAAAIABgAEAAAABQAGAAAABwABAAQABwADAAEABgAHAAQABQADAAcABQAHAAYA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAAAAP////8AAAAA//8AAAAAAAAAAP//AAD///////8AAAAAAAAAAAAA//8AAAAAAAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6ive7"]
+resource_name = "mainHotel_GWJ99_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1, -0.08941952, -1, 2, 0.17883904, 2),
+"attribute_data": PackedByteArray("/5//f///AAD/3/8/AAD////f/38AAAAA/5//P///////X/8///9xi/+fAAAAAI10/5//P///jXT/XwAAAABxi/9f//8AAHGL/5//v///jXT/n///AACNdP9f/7///3GL/x//fwAAAAD/X/8///////9f/3///wAA/x//PwAA////X/9///9xi/+f/z8AAI10/5//f///jXT/X/8/AABxi/9f/78AAHGL/5//f///jXT/n/+/AACNdP9f/3///3GL"),
+"format": 34896613431,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_6p16x"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAA//8AAP///////wAA//8AAP///////////////wAA////vwAA//////+//////////78AAAAA////vwAAAAD//1TVAAD//wAAVNUAAP////9U1QAAAAAAAFTVAAAAAAAA/7///wAA////v///AAAAAP+/AAAAAP///7///wAAAABU1f///////1TV/////wAAVNX//wAA//9U1QAAAAAAAP///////wAA//8AAP//AAD/////AAAAAP///3//v/9//7//f/+//3//v/////////////////////9U1VTVVNVU1VTVVNVU1VTVAAD/fwAA/38AAP9/AAD/f6oqqiqqKqoqqiqqKqoqqir/v/+//7//v/+//7//v/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7g3qm")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u4c48"]
+size = Vector3(2, 0.17883904, 2)
+
+[node name="backRoomsCarpet" type="MeshInstance3D" unique_id=1734554264]
+mesh = SubResource("ArrayMesh_6ive7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=50501304]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=466724807]
+shape = SubResource("BoxShape3D_u4c48")

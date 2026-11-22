@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://ccur73j5spldx"]
+
+[ext_resource type="Texture2D" uid="uid://qjloaihopac" path="res://GLB/mainHotel_GWJ99_wood_diffuse.png" id="1_mkl3h"]
+[ext_resource type="Texture2D" uid="uid://btqa3ausm6pm1" path="res://GLB/mainHotel_GWJ99_wood_metalic-wood_roughness.png" id="2_fe40v"]
+[ext_resource type="Texture2D" uid="uid://d12fq8t4eh6t2" path="res://GLB/mainHotel_GWJ99_wood_normals.png" id="3_f4ht3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wf1yp"]
+resource_name = "Material.004"
+cull_mode = 2
+albedo_texture = ExtResource("1_mkl3h")
+metallic = 1.0
+metallic_texture = ExtResource("2_fe40v")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_fe40v")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("3_f4ht3")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_sq0d4"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4m5f8"]
+resource_name = "mainHotel_GWJ99_Plane_001"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray(0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0),
+"format": 34896613431,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 3, 0, 1, 0),
+"material": SubResource("StandardMaterial3D_wf1yp"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 0, 0, 255, 255, 255, 191, 0, 0, 0, 0, 0, 0, 255, 191, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_sq0d4")
+
+[node name="backRoomsCeiling_001" type="MeshInstance3D" unique_id=808490075]
+mesh = SubResource("ArrayMesh_4m5f8")

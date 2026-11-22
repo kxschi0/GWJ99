@@ -1,0 +1,45 @@
+[gd_scene format=4 uid="uid://cy7sxy7e4d5tx"]
+
+[ext_resource type="Texture2D" uid="uid://5dm0c0s326l7" path="res://GLB/missing_GWJ99_bush02.webp" id="1_gtcxb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yveey"]
+resource_name = "Material.003"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_gtcxb")
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7bl7k"]
+_surfaces = [{
+"aabb": AABB(-0.606673, -0.606673, -0.606673, 1.213346, 1.213346, 1.213346),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"name": "Material.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("fSUAAIHaAACB2v//fSUAAIHaAAB9JQAAfSX//4HaAAAAAAAA/38AAP//////fwAA//8AAP9/AAAAAP///38AAP9/AAD//wAA/3///wAAAAD/fwAAAAAAAP9//////wAAgdoAAIHaAAB9Jf//fSUAAH0lAAB9JQAAgdr//4HaAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dks82"]
+resource_name = "missing_GWJ99_Plane_002"
+_surfaces = [{
+"aabb": AABB(-0.606673, -0.606673, -0.606673, 1.213346, 1.213346, 1.213346),
+"attribute_data": PackedByteArray("AAD/////AAD/////AAAAAAAA/////wAA/////wAAAAAAAP////8AAP////8AAAAAAAD/////AAD/////AAAAAA=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_yveey"),
+"name": "Material.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("fSUAAIHa/5+B2v//fSX/n4HaAAB9Jf+ffSX//4Ha/58AAAAA/38AgP//////fwCA//8AAP9/AIAAAP///38AgP9/AAD///+//3///wAA/7//fwAAAAD/v/9///////+/gdoAAIHa/999Jf//fSX/330lAAB9Jf/fgdr//4Ha/9//fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7bl7k")
+
+[node name="bush01" type="MeshInstance3D" unique_id=494065711]
+mesh = SubResource("ArrayMesh_dks82")

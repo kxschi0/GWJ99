@@ -1,0 +1,47 @@
+[gd_scene format=4 uid="uid://bl8eqqwaku6cr"]
+
+[ext_resource type="Texture2D" uid="uid://csgy5b77qv16j" path="res://GLB/missing_GWJ99_bush05-removebg-preview.png" id="1_n5m3d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gqx01"]
+resource_name = "Material.004"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_n5m3d")
+roughness = 0.5
+metadata/_gltf_primary_texture_coord = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vmmqv"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAD/f///AAD///9/AAAAAP///3///wAAAAD/fwAAAAB9JX0l//8AAIHagdoAAAAAgdqB2v//AAB9JX0lAAAAAH0lgdr//wAAgdp9JQAAAACB2n0l//8AAH0lgdoAAAAA/3//////AAD/fwAAAAAAAP9/AAD//wAA/3///wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nb84x"]
+resource_name = "missing_GWJ99_Plane_007"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("AAD/////AAD/////AAAAAAAA/////wAA/////wAAAAAAAP////8AAP////8AAAAAAAD/////AAD/////AAAAAA=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_gqx01"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAD/f////7////9/AAD/v////3////+/AAD/fwAA/799JX0l///8xYHagdoAAPzFgdqB2v///MV9JX0lAAD8xX0lgdr///zFgdp9JQAA/MWB2n0l///8xX0lgdoAAPzF/3//////VNX/fwAAAABU1f9/AAD//1TV/3///wAAVNX///9/////f////3////9//+L9uf/i/bn/4v25/+L9uQDGAGMAxgBjAMYAYwDGAGOqqlRVqqpUVaqqVFWqqlRV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vmmqv")
+
+[node name="bush02" type="MeshInstance3D" unique_id=2039403159]
+transform = Transform3D(0.34585333, 0.34585336, -1.0307227e-08, -1.4576628e-08, 4.3441736e-16, -0.48911035, -0.34585336, 0.3458533, 1.030723e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_nb84x")

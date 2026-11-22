@@ -1,0 +1,52 @@
+[gd_scene format=4 uid="uid://44i4f58kkg4v"]
+
+[ext_resource type="Texture2D" uid="uid://1ki6mg4xp61y" path="res://GLB/medicalOffice_whiteWall_diffuse.png" id="1_c5f1u"]
+[ext_resource type="Texture2D" uid="uid://csn1mpl73jsyb" path="res://GLB/medicalOffice_whiteWall_rough.png" id="2_nr8wy"]
+[ext_resource type="Texture2D" uid="uid://gfsw4t1mj0g4" path="res://GLB/medicalOffice_whiteWall.png" id="3_lbu2k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svjnw"]
+resource_name = "Material.005"
+cull_mode = 2
+albedo_texture = ExtResource("1_c5f1u")
+metallic_texture = ExtResource("2_nr8wy")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_nr8wy")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_lbu2k")
+metadata/_gltf_primary_texture_coord = 1
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_i3p45"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -0.100000024, 2, 2, 0.20000005),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAAAEAAEAAwAFAAIABQAAAAIABgAEAAAABQAGAAAABwABAAQABwADAAEABgAHAAQABQADAAcABQAHAAYA"),
+"name": "Material.005",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("////////AAAAAAAA/v8AAAAA/////wAAAAAAAAAAAAD//wAA/v8AAAAA//8AAAAA/////wAAAAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nlkwe"]
+resource_name = "medicalOffice_Cube_003"
+_surfaces = [{
+"aabb": AABB(-1, -1, -0.100000024, 2, 2, 0.20000005),
+"attribute_data": PackedByteArray("//8AAP+f/38AAP///9//PwAAAAD/3/9///////+f/z///////1//PwAAAAD/nwAA//8AAP+f/z8AAP///18AAAAA////X/////8AAP+f/78AAAAA/5//////////X/+/AAAAAP8f/3///////1//P///AAD/X/9/AAD///8f/z///////1//fwAAAAD/n/8///8AAP+f/38AAP///1//PwAA////X/+///8AAP+f/38AAAAA/5//v///////X/9/"),
+"format": 34896613431,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_svjnw"),
+"name": "Material.005",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("////////AIAAAAAA/v8AgAAA/////wCA//8AAP7/AID//wAAAAD/vwAAAAD+//+///8AAP7//78AAAAAAAD/vwAAAAAAAKoqAAD/////qioAAAAA/v+qKgAA//8AAKoqAAD//wAAAAD//wAAAAAAAP////8AAAAAAAAAAAAAAAD/////AABU1f//AAD+/1TV////////VNX//wAAAABU1QAA//8AAP8//////////z8AAP//////P/////8AAP8//3////9/////f////3///wAA/38AAP9/AAD/fwAA/39U1VTVVNVU1VTVVNVU1VTV////f////3////9/////f6oqqiqqKqoqqiqqKqoqqir///9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_i3p45")
+
+[node name="medicWall" type="MeshInstance3D" unique_id=1095562536]
+mesh = SubResource("ArrayMesh_nlkwe")
