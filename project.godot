@@ -25,6 +25,10 @@ window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[global_group]
+
+"Map Geometry"=""
+
 [input]
 
 ui_left={
@@ -91,6 +95,7 @@ Interact={
 3d_physics/layer_1="World"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Interactables"
+3d_physics/layer_4="Monster"
 
 [physics]
 
