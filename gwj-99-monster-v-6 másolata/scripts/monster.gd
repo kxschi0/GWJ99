@@ -24,12 +24,13 @@ var field_of_view_degrees:= 180.0
 @onready var animation_player: AnimationPlayer = $VisualPivot/AnimationPlayer
 @onready var jumpscare_area: Area3D = $JumpscareArea
 
-enum State { GRACE_PERIOD, PATROL, CHASE, SEARCHING, JUMPSCARE }
+enum State { GRACE_PERIOD, PATROL, CHASE, SEARCHING, COOLDOWN, JUMPSCARE }
 var current_state: State = State.GRACE_PERIOD
 
 var state_timer:= 0.0
 var grace_time:= 15.0
 var active_patrol_time:= 25.0
+var cooldown_time:= 20.0
 var detection_penalty:= 15.0
 
 var player: Node3D = null
@@ -215,25 +216,35 @@ func _physics_process(delta):
 		State.PATROL:
 			patrol_behavior(delta)
 			if state_timer <= 0.0:
-				state_timer = active_patrol_time # Újraindítjuk a járőr időt, így sosem despawnol
+				start_cooldown()
 			elif check_player_detected():
 				trigger_detection_penalty()
 				
 		State.CHASE:
 			chase_behavior(delta)
 			if state_timer <= 0.0:
-				current_state = State.PATROL
-				state_timer = active_patrol_time
+				start_cooldown()
 			elif check_player_detected():
 				trigger_detection_penalty()
 				
 		State.SEARCHING:
 			searching_behavior(delta)
 			if state_timer <= 0.0:
-				current_state = State.PATROL
-				state_timer = active_patrol_time
+				start_cooldown()
 			elif check_player_detected():
 				trigger_detection_penalty()
+				
+		State.COOLDOWN:
+			if is_spawned:
+				cooldown_behavior(delta)
+				if state_timer <= 0.0:
+					if check_player_detected():
+						trigger_detection_penalty()
+					elif check_out_of_line_of_sight():
+						start_retreat_to_spawn()
+			else:
+				if state_timer <= 0.0:
+					start_patrol()
 
 func set_stalker_active(active: bool):
 	is_spawned = active
@@ -262,6 +273,11 @@ func start_patrol():
 	state_timer = active_patrol_time
 	patrol_pause_timer = 0.0
 	pick_new_patrol_target()
+
+func start_retreat_to_spawn():
+	current_state = State.COOLDOWN
+	var nav_map = get_world_3d().navigation_map
+	nav_agent.target_position = NavigationServer3D.map_get_closest_point(nav_map, exact_spawn_position)
 
 func find_valid_random_spawn_position():
 	var nav_map = get_world_3d().navigation_map
@@ -364,7 +380,6 @@ func searching_behavior(delta):
 		decelerate_to_stop(delta)
 		if search_timer <= 0.0:
 			current_state = State.PATROL
-			state_timer = active_patrol_time
 			pick_new_patrol_target()
 	else:
 		navigate_smoothly(delta, stalker_speed)
@@ -422,6 +437,23 @@ func check_if_stuck(delta):
 		stuck_timer = 0.0
 	last_position = global_position
 
+func start_cooldown():
+	current_state = State.COOLDOWN
+	state_timer = cooldown_time
+	if check_out_of_line_of_sight():
+		start_retreat_to_spawn()
+
+func cooldown_behavior(delta):
+	if check_player_detected():
+		trigger_detection_penalty()
+		return
+
+	var dist_to_spawn = global_position.distance_to(exact_spawn_position)
+	if dist_to_spawn < 1.5 or nav_agent.is_navigation_finished():
+		despawn()
+	else:
+		navigate_smoothly(delta, base_player_speed * 0.7)
+
 func check_player_detected():
 	if not player or not is_spawned:
 		return false
@@ -451,11 +483,19 @@ func trigger_detection_penalty():
 	current_state = State.CHASE
 	last_known_player_position = player.global_position
 
-func get_state_name():
-	match current_state:
-		State.GRACE_PERIOD: return "GRACE PERIOD (Waiting)"
-		State.PATROL: return "PATROL (Searching Corridors)"
-		State.CHASE: return "CHASE (Player Spotted!)"
-		State.SEARCHING: return "SEARCHING (Checking Last Location)"
-		State.JUMPSCARE: return "JUMPSCARE"
-	return ""
+func check_out_of_line_of_sight() -> bool:
+	if not player:
+		return true
+	var space_state = get_world_3d().direct_space_state
+	var from_pos = global_position + Vector3(0, 1.3, 0)
+	var to_pos = player.global_position + Vector3(0, 1.0, 0)
+	var query = PhysicsRayQueryParameters3D.create(from_pos, to_pos)
+	query.exclude = [self.get_rid()]
+	var result = space_state.intersect_ray(query)
+	if result and (result.collider == player or result.collider.is_in_group("player")):
+		return false
+	return true
+
+func despawn():
+	set_stalker_active(false)
+	state_timer = cooldown_time
