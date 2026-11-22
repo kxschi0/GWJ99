@@ -1,4 +1,9 @@
 extends Interactable
 
+var collected: bool = false
+
 func _on_interaction() -> void:
-	queue_free()
+	if not collected:
+		collected = true
+		SignalBus.key_collected.emit()
+		queue_free()

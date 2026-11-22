@@ -1,9 +1,9 @@
-[gd_scene format=4 uid="uid://bdxu2kbqby321"]
+[gd_scene format=4 uid="uid://cc3gsvtwciqv1"]
 
 [ext_resource type="Script" uid="uid://bj8gsn70r24ce" path="res://Interactables/safe_key.gd" id="1_hdkcu"]
-[ext_resource type="Texture2D" uid="uid://cqvs1x8jv0slo" path="res://GLB/safe_GWJ99_safeKey_diffuse.png" id="2_hdkcu"]
-[ext_resource type="Texture2D" uid="uid://digxhbwr504xe" path="res://GLB/safe_GWJ99_safeKey-safeKey_roughness.png" id="3_i7t7j"]
-[ext_resource type="Texture2D" uid="uid://cgsv3ova8bw7p" path="res://GLB/safe_GWJ99_safeKey_normal.png" id="4_84hu6"]
+[ext_resource type="Texture2D" uid="uid://beuys8q4w0tyg" path="res://GLB/safe_GWJ99_safeKey_diffuse.png" id="2_hdkcu"]
+[ext_resource type="Texture2D" uid="uid://bdwk48gkcuxij" path="res://GLB/safe_GWJ99_safeKey-safeKey_roughness.png" id="3_i7t7j"]
+[ext_resource type="Texture2D" uid="uid://j77inkdu3ew5" path="res://GLB/safe_GWJ99_safeKey_normal.png" id="4_84hu6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hdkcu"]
 size = Vector3(0.32128906, 0.08569336, 0.7873535)
@@ -11,6 +11,7 @@ size = Vector3(0.32128906, 0.08569336, 0.7873535)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50wwg"]
 resource_name = "Material.005"
 cull_mode = 2
+albedo_color = Color(2.454227, 2.454227, 0, 1)
 albedo_texture = ExtResource("2_hdkcu")
 metallic = 1.0
 metallic_texture = ExtResource("3_i7t7j")

@@ -11,6 +11,46 @@ gradient = SubResource("Gradient_n2snw")
 width = 4
 height = 4
 
+[sub_resource type="LabelSettings" id="LabelSettings_ne75i"]
+font_size = 64
+
+[sub_resource type="Animation" id="Animation_bytes"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WinScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ne75i"]
+resource_name = "WinScreen"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WinScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bytes"]
+_data = {
+&"RESET": SubResource("Animation_bytes"),
+&"WinScreen": SubResource("Animation_ne75i")
+}
+
 [node name="HUD" type="Control" unique_id=135806594]
 layout_mode = 3
 anchors_preset = 15
@@ -45,3 +85,43 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Sample Text"
+
+[node name="WinScreen" type="Control" parent="." unique_id=1920766931]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="WinScreen" unique_id=1907424367]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="WinScreen" unique_id=140696272]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.5
+offset_top = -44.0
+offset_right = 202.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Escaped!"
+label_settings = SubResource("LabelSettings_ne75i")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=265776593]
+libraries/ = SubResource("AnimationLibrary_bytes")

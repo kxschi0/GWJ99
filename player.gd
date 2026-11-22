@@ -64,6 +64,9 @@ func _process(delta: float) -> void:
 				get_tree().current_scene.hud.show_interaction_text(collider.interaction_text)
 				if Input.is_action_just_pressed("Interact"):
 					interact(collider)
+			else:
+				if collision == 0:
+					get_tree().current_scene.hud.hide_interaction_text()
 	elif interact_ray.enabled:
 		get_tree().current_scene.hud.hide_interaction_text()
 
@@ -111,3 +114,8 @@ func disable_movement():
 func look_at_target(target_global_position: Vector3):
 	if player_camera:
 		player_camera.look_at(target_global_position + Vector3(0, 1.4, 0), Vector3.UP)
+
+
+func _on_ending_trigger_body_entered(body: Node3D) -> void:
+	if body == get_tree().current_scene.player:
+		SignalBus.exit_reached.emit()

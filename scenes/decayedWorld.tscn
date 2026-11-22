@@ -19,7 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://bquvvgxwmocxi" path="res://assetLib/medic_floor.tscn" id="17_uqlge"]
 [ext_resource type="PackedScene" uid="uid://44i4f58kkg4v" path="res://assetLib/medic_wall.tscn" id="18_sw7pi"]
 [ext_resource type="PackedScene" uid="uid://dkggovy85l1n0" path="res://Interactables/door.tscn" id="19_7feae"]
-[ext_resource type="PackedScene" path="res://Interactables/decayeddoor.tscn" id="20_xgx1s"]
+[ext_resource type="PackedScene" uid="uid://opbq2180ysoe" path="res://Interactables/locked_door.tscn" id="20_aty6s"]
+[ext_resource type="PackedScene" uid="uid://yjv0hrqmb1ae" path="res://Interactables/decayeddoor.tscn" id="20_xgx1s"]
+[ext_resource type="PackedScene" uid="uid://cc3gsvtwciqv1" path="res://safe_key.tscn" id="21_tayei"]
 
 [node name="map3" type="Node3D" unique_id=1941927992]
 script = ExtResource("1_tayei")
@@ -1102,6 +1104,7 @@ transform = Transform3D(-3, 0, -2.6226832e-07, 0, 3, 0, 2.6226832e-07, 0, -3, 22
 visible = false
 
 [node name="CorridorCeiling" type="Node3D" parent="." unique_id=1603257441]
+visible = false
 
 [node name="backRoomsCeiling_002" parent="CorridorCeiling" unique_id=264561654 instance=ExtResource("5_uub65")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 24, 11.864184, 17)
@@ -1770,6 +1773,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.15988, 0.38160145, 0.37127
 [node name="Door3" parent="Doors" unique_id=1774889535 instance=ExtResource("19_7feae")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -26.85952, 0, -2.8534806)
 
+[node name="LockedDoor" parent="Doors" unique_id=738507860 instance=ExtResource("20_aty6s")]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 9.124657, 0, -30.107946)
+
+[node name="Door4" parent="Doors" unique_id=359610453 instance=ExtResource("20_xgx1s")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -69, 0, 3)
+
 [node name="NearDomeAssets" type="Node3D" parent="." unique_id=1217348435]
 
 [node name="BackRoomsWallDoorway" parent="NearDomeAssets" unique_id=281239974 instance=ExtResource("16_q2rvg")]
@@ -1799,10 +1808,15 @@ transform = Transform3D(2, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 13.8
 [node name="backRoomsCeiling_006" parent="NearDomeAssets" unique_id=1059571506 instance=ExtResource("5_uub65")]
 transform = Transform3D(2, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 13.853327, 5.163325, -29.827612)
 
-[node name="Door" parent="." unique_id=1993138581 instance=ExtResource("20_xgx1s")]
-transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 9.124657, 0, -30.107946)
+[node name="Keys" type="Node3D" parent="." unique_id=1362765726]
 
-[node name="Door2" parent="." unique_id=359610453 instance=ExtResource("20_xgx1s")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -69, 0, 3)
+[node name="SafeKey" parent="Keys" unique_id=159238092 instance=ExtResource("21_tayei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.045394, 0.27685738, 51.444416)
+
+[node name="SafeKey2" parent="Keys" unique_id=2088311709 instance=ExtResource("21_tayei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.037445, 0.30859792, 4.850872)
+
+[node name="SafeKey3" parent="Keys" unique_id=698267227 instance=ExtResource("21_tayei")]
+transform = Transform3D(0.95607483, 0, -0.2931227, 0, 1, 0, 0.2931227, 0, 0.95607483, -18.91339, 0.27685642, -3.2553334)
 
 [editable path="Player"]
